@@ -13,6 +13,8 @@ public class Main {
         Database database = new Database("jdbc:sqlite:opiskelijat.db");
         database.init();
         
+        Database databaseU = new Database("jdbc:sqlite:foorumi.db");
+        
         String a = "66KES88";
 
         OpiskelijaDao opiskelijaDao = new OpiskelijaDao(database);

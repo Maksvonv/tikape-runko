@@ -1,14 +1,54 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package tikape.runko.domain;
 
-/**
- *
- * @author arttu
- */
+
 public class Avaus {
+    
+    private Integer id;
+    private Integer alue;
+    private String avauksen_otsikko;
+    private String avauksen_sisalto; //ö?
+
+    public Avaus(Integer id, Integer alue, String avauksen_otsikko, String avauksen_sisalto) {
+        this.id = id;
+        this.alue = alue;
+        this.avauksen_otsikko = avauksen_otsikko;
+        this.avauksen_sisalto = avauksen_sisalto;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getAlue() {
+        return alue;
+    }
+
+    public void setAlue(Integer alue) {
+        this.alue = alue;
+    }
+
+    public String getAvauksen_otsikko() {
+        return avauksen_otsikko;
+    }
+
+    public void setAvauksen_otsikko(String avauksen_otsikko) {
+        this.avauksen_otsikko = avauksen_otsikko;
+    }
+
+    public String getAvauksen_sisalto() {
+        return avauksen_sisalto;
+    }
+
+    public void setAvauksen_sisalto(String avauksen_sisalto) {
+        this.avauksen_sisalto = avauksen_sisalto;
+    }
+    
+    
+    
     
 }

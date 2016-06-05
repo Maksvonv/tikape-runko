@@ -15,7 +15,7 @@ public class Main {
         
         Database databaseU = new Database("jdbc:sqlite:foorumi.db");
         
-        String a = "66KES88";
+        String a = "66UUKES";
 
         OpiskelijaDao opiskelijaDao = new OpiskelijaDao(database);
 

@@ -35,7 +35,6 @@ public class AvausDao implements Dao<Avaus, Integer> {
         }
 
         Integer id = rs.getInt("id");
-
         Integer alue = rs.getInt("alue");
         String avauksen_otsikko = rs.getString("avauksen_otsikko");
         String avauksen_sisalto = rs.getString("avauksen_sisältö");

@@ -45,7 +45,7 @@ public class Database {
 //        lista.add("INSERT INTO Opiskelija (nimi) VALUES ('Homeros');");
         
         
-        lista.add("CREATE TABLE Alue (id INTEGER PRIMARY KEY, alueen_nimi VARCHAR NOT NULL))");
+        lista.add("CREATE TABLE Alue (id INTEGER PRIMARY KEY, alueen_nimi VARCHAR NOT NULL)");
         lista.add("CREATE TABLE Avaus ( id INTEGER PRIMARY KEY, alue INTEGER NOT NULL, "
                 + "avauksen_otsikko VARCHAR(30) NOT NULL, avauksen_sisalto VARCHAR(500) NOT NULL, FOREIGN KEY (alue) REFERENCES Alue(id));");
         lista.add("CREATE TABLE Viesti (id INTEGER PRIMARY KEY, avaus INTEGER NOT NULL, aikaleima TIMESTAMP, "

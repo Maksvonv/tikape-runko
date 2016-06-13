@@ -4,6 +4,7 @@ import java.util.HashMap;
 import spark.ModelAndView;
 import static spark.Spark.*;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
+import tikape.runko.database.AvausDao;
 import tikape.runko.database.Database;
 import tikape.runko.database.OpiskelijaDao;
 
@@ -15,9 +16,12 @@ public class Main {
         
         Database databaseU = new Database("jdbc:sqlite:foorumi.db");
         
-        String a = "66UUKES";
+        String a = "66KES88";
 
         OpiskelijaDao opiskelijaDao = new OpiskelijaDao(database);
+        AvausDao avausDao = new AvausDao(databaseU);
+        
+        
 
         get("/", (req, res) -> {
             HashMap map = new HashMap<>();

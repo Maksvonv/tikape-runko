@@ -32,7 +32,7 @@ public class Main {
 
         get("/opiskelijat", (req, res) -> {
             HashMap map = new HashMap<>();
-            map.put("opiskelijat", opiskelijaDao.findAll());
+            map.put("opiskelijat", avausDao.findAll());
 
             return new ModelAndView(map, "opiskelijat");
         }, new ThymeleafTemplateEngine());

@@ -6,28 +6,43 @@
         <meta charset="utf-8" />
 
         <style>
-
+     
+  
         </style>
     </head>
 
-    <body>
+    <body> 
         <h1>Heippa vaan!</h1>
 
         <p>Ja .. <span th:text="${viesti}">jotain?</span></p>
 
         <p><a href="/opiskelijat">Tästä opiskelijalistaukseen.</a></p>
+        <div>  
+<!--            Täl divil pitäs saada jotenki muokattuu ne 3 lokeroo.. Css pitää salee käyttää-->
+            <ol>
+                <li th:each="alue: ${alueet}">
+                    <span th:text="${alue.alueen_nimi}">alueen nimi</span>
+                    <span th:text="${alue.id}">alueen id</span>
 
-        <ol>
-            <li th:each="alue: ${alueet}">
-                <span th:text="${alue.alueen_nimi}">alueen nimi</span>
-                <span th:text="${alue.id}">alueen id</span>
-                
-            </li>
+                </li>
+            </ol>
+        </div>
+
+        <div>
+            <ol>
+
+                <li th:each="alue: ${paska}">
+                    <span th:text="${alue.alueen_nimi}">alueen nimi</span>
+                    <span th:text="${alue.ketjujen_maara}">ketjujen maara</span>
+                    
+
+                </li>
+
+            </ol>
+        </div>
 
 
 
-
-        </ol>
 
 
     </body>

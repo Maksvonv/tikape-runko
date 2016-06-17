@@ -5,11 +5,21 @@ public class Alue {
     
     private Integer id;
     private String alueen_nimi;
+    
+    private Integer ketjujen_maara;
 
     public Alue(Integer id, String alueen_nimi) {
         this.id = id;
         this.alueen_nimi = alueen_nimi;
     }
+
+    public Alue(String alueen_nimi, Integer ketjujen_maara) {
+       
+        this.alueen_nimi = alueen_nimi;
+        this.ketjujen_maara = ketjujen_maara;
+    } //kyselyy varte
+    
+    
 
     public Integer getId() {
         return id;
@@ -26,6 +36,18 @@ public class Alue {
     public void setAlueen_nimi(String alueen_nimi) {
         this.alueen_nimi = alueen_nimi;
     }
+
+    public Integer getKetjujen_maara() {
+        return ketjujen_maara;
+    }
+
+    public void setKetjujen_maara(Integer ketjujen_maara) {
+        this.ketjujen_maara = ketjujen_maara;
+    }
+
+   
+    
+    
     
     
 }

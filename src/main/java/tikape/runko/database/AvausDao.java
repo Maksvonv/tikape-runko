@@ -39,7 +39,7 @@ public class AvausDao implements Dao<Avaus, Integer> {
         String avauksen_otsikko = rs.getString("avauksen_otsikko");
         String avauksen_sisalto = rs.getString("avauksen_sisalto");
 
-        Avaus o = new Avaus(id, id, avauksen_otsikko, avauksen_sisalto);
+        Avaus o = new Avaus(id, alue, avauksen_otsikko, avauksen_sisalto);
 
         rs.close();
         stmt.close();

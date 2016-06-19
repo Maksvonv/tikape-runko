@@ -61,16 +61,17 @@ public class AlueDao implements Dao<Alue, Integer> {
     public List<Alue> viestien_maara() throws SQLException { //huonosti nimetty ja timestamp puuttuu
         
         Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("SELECT Alue.alueen_nimi, COUNT(Avaus.id) AS ketjujen_maara, MAX(viesti.aikaleima) AS Uusin_viesti FROM Viesti, Avaus, Alue WHERE Avaus.alue = Alue.id AND Viesti.avaus = Avaus.id GROUP BY Alue.id");
+        PreparedStatement stmt = connection.prepareStatement("SELECT Alue.id, Alue.alueen_nimi, COUNT(Avaus.id) AS ketjujen_maara, MAX(viesti.aikaleima) AS Uusin_viesti FROM Viesti, Avaus, Alue WHERE Avaus.alue = Alue.id AND Viesti.avaus = Avaus.id GROUP BY Alue.id");
         //"SELECT Alue.alueen_nimi, COUNT(DISTINCT Avaus.id) AS ketjujen_maara, MAX(viesti.aikaleima) AS Uusin_viesti FROM Viesti, Avaus, Alue WHERE Avaus.alue = Alue.id AND Viesti.avaus = Avaus.id GROUP BY Alue.id"
         ResultSet rs = stmt.executeQuery();
         List<Alue> alue = new ArrayList<>();
         while (rs.next()) {
+          Integer id = rs.getInt("id");
           String alueen_nimi = rs.getString("alueen_nimi");
           Integer ketjujen_maara = rs.getInt("ketjujen_maara");
           //Integer ketjujen_maara = rs.getInt("ketjujen_maara");
           
-          alue.add(new Alue(alueen_nimi, ketjujen_maara));
+          alue.add(new Alue(id, alueen_nimi, ketjujen_maara));
         }
         
         rs.close();

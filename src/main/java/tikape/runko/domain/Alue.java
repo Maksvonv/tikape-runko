@@ -13,8 +13,9 @@ public class Alue {
         this.alueen_nimi = alueen_nimi;
     }
 
-    public Alue(String alueen_nimi, Integer ketjujen_maara) {
+    public Alue(Integer id, String alueen_nimi, Integer ketjujen_maara) {
        
+        this.id = id;
         this.alueen_nimi = alueen_nimi;
         this.ketjujen_maara = ketjujen_maara;
     } //kyselyy varte

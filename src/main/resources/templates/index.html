@@ -34,6 +34,7 @@
                 <li th:each="alue: ${paska}">
                     <span th:text="${alue.alueen_nimi}">alueen nimi</span>
                     <span th:text="${alue.ketjujen_maara}">ketjujen maara</span>
+                    <a th:href="${'/alue/' + alue.id}">linkki</a>
                     
 
                 </li>

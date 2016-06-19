@@ -24,6 +24,9 @@ public class Main {
         AvausDao avausDao = new AvausDao(databaseU);
         AlueDao alueDao = new AlueDao(databaseU);
         
+     
+        
+       
         
 
         get("/", (req, res) -> {
@@ -32,6 +35,13 @@ public class Main {
             map.put("paska", alueDao.viestien_maara());
 
             return new ModelAndView(map, "index");
+        }, new ThymeleafTemplateEngine());
+        
+        get("/alue/:id", (req, res) -> {
+            HashMap map = new HashMap<>();
+            map.put("alue", alueDao.findOne(Integer.parseInt(req.params("id"))));
+
+            return new ModelAndView(map, "alue");
         }, new ThymeleafTemplateEngine());
 
         get("/opiskelijat", (req, res) -> {

@@ -72,6 +72,30 @@ public class AvausDao implements Dao<Avaus, Integer> {
         return avaus;
     }
 
+    public List<Avaus> etsiOikeat(Integer key) throws SQLException {
+
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Avaus WHERE alue = ?");
+        stmt.setObject(1, key);
+        
+        ResultSet rs = stmt.executeQuery();
+        List<Avaus> avaus = new ArrayList<>();
+        while (rs.next()) {
+            Integer id = rs.getInt("id");
+            Integer alue = rs.getInt("alue");
+            String avauksen_otsikko = rs.getString("avauksen_otsikko");
+            String avauksen_sisalto = rs.getString("avauksen_sisalto");
+
+            avaus.add(new Avaus(id, alue, avauksen_otsikko, avauksen_sisalto));
+        }
+
+        rs.close();
+        stmt.close();
+        connection.close();
+
+        return avaus;
+    }
+
     @Override
     public void delete(Integer key) throws SQLException {
         // ei toteutettu

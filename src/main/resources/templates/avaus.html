@@ -7,12 +7,12 @@
     </head>
 
     <body>
-        <h1> <span th:text="${alue.alueen_nimi}">alueen nimi</span>!</h1>
+        <h1> <span th:text="${avaus.avauksen_otsikko}">avauksen otsikko</span>!</h1>
 
         <ol>
-            <li th:each="avaus: ${avaukset}">
-                <span th:text="${avaus.avauksen_otsikko}">avauksen nimi</span>
-                <a th:href="${'/avaus/' + avaus.id}">linkki</a>
+            <li th:each="viesti: ${viestit}">
+                <span th:text="${viesti.nimimerkki}">viestin lähettäjä</span>
+                
             </li>
 
 

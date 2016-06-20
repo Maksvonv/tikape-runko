@@ -1,7 +1,14 @@
 package tikape.runko;
-
+import static java.lang.Math.random;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.HashMap;
 import spark.ModelAndView;
+import spark.Request;
+import spark.Response;
+import spark.Route;
 import static spark.Spark.*;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 import tikape.runko.database.AlueDao;
@@ -19,12 +26,20 @@ public class Main {
         Database databaseU = new Database("jdbc:sqlite:foorumi.db");
         
         String a = "66KES88";
+        
+        int id = 100004; // pitää vaihtaa joka viestin jälkeen
+        
+        
 
         OpiskelijaDao opiskelijaDao = new OpiskelijaDao(database);
         
         AvausDao avausDao = new AvausDao(databaseU);
         AlueDao alueDao = new AlueDao(databaseU);
         ViestiDao viestiDao = new ViestiDao(databaseU);
+        
+        Connection connection = DriverManager.getConnection("jdbc:sqlite:foorumi.db");
+
+       
         
      
         
@@ -69,5 +84,19 @@ public class Main {
 
             return new ModelAndView(map, "opiskelija");
         }, new ThymeleafTemplateEngine());
-    }
+        
+        post("/uusi", new Route() {
+
+            public Object handle(Request req, Response res) throws SQLException {
+                String viesti = req.queryParams("viesti");
+                
+                String nimimerkki = req.queryParams("nimimerkki");
+                Statement stmt = connection.createStatement();
+                stmt.executeUpdate("INSERT INTO Viesti (id, avaus, nimimerkki, viestin_sisältö) VALUES ("+id+", 1, \""+ nimimerkki +"\" , \"" +viesti+ "\");");
+                
+                return "Viesti: \"" + viesti +"\" lähetetty";
+            }
+        });
+    
+}
 }

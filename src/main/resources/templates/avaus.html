@@ -12,7 +12,7 @@
         <ol>
             <li th:each="viesti: ${viestit}">
                 <span th:text="${viesti.nimimerkki}">viestin lähettäjä</span>
-                
+
             </li>
 
 
@@ -20,6 +20,13 @@
 
         </ol>
 
-        <p> </p>
-    </body>
-</html>
+
+         <form method="POST" action="/uusi">
+  Nimimerkki:
+  <input type="text" name="nimimerkki"></input>
+  Viesti:
+  <input type="text" name="viesti"></input>
+  <input type="submit" value="Lähetä"></input>
+</form> 
+       </body>
+ </html>

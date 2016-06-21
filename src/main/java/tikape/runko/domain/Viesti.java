@@ -7,17 +7,15 @@ public class Viesti {
     private Integer avaus;
     //private timestamp 
     private String nimimerkki;
-    private String viestin_sisältö; //ö?
-     private Integer vastaus_viestiin;
+    private String viestin_sisalto; //ö?
 
 
 
-public Viesti(Integer id, Integer avaus, String nimimerkki, String viestin_sisaltö, Integer vastaus_viestiin) {
+public Viesti(Integer id, Integer avaus, String nimimerkki, String viestin_sisalto) {
         this.id = id;
         this.avaus = avaus;
         this.nimimerkki = nimimerkki;
-        this.viestin_sisältö = viestin_sisältö;
-        this.vastaus_viestiin = vastaus_viestiin;
+        this.viestin_sisalto = viestin_sisalto;
     }
 
  
@@ -47,11 +45,11 @@ public Viesti(Integer id, Integer avaus, String nimimerkki, String viestin_sisal
     }
 
     public String getViestin_sisalto() {
-        return viestin_sisältö;
+        return viestin_sisalto;
     }
 
     public void setViestin_sisältö(String viestin_sisalto) {
-        this.viestin_sisältö = viestin_sisalto;
+        this.viestin_sisalto = viestin_sisalto;
     }
 
     

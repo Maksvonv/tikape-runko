@@ -8,12 +8,14 @@ public class Avaus {
     private Integer alue;
     private String avauksen_otsikko;
     private String avauksen_sisalto; //ö?
+    private String nimimerkki;
 
-    public Avaus(Integer id, Integer alue, String avauksen_otsikko, String avauksen_sisalto) {
+    public Avaus(Integer id, Integer alue, String avauksen_otsikko, String avauksen_sisalto, String nimimerkki) {
         this.id = id;
         this.alue = alue;
         this.avauksen_otsikko = avauksen_otsikko;
         this.avauksen_sisalto = avauksen_sisalto;
+        this.nimimerkki = nimimerkki;
     }
 
     public Integer getId() {
@@ -47,6 +49,16 @@ public class Avaus {
     public void setAvauksen_sisalto(String avauksen_sisalto) {
         this.avauksen_sisalto = avauksen_sisalto;
     }
+
+    public String getNimimerkki() {
+        return nimimerkki;
+    }
+
+    public void setNimimerkki(String nimimerkki) {
+        this.nimimerkki = nimimerkki;
+    }
+    
+    
     
     
     

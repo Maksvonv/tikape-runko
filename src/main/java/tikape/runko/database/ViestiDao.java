@@ -44,11 +44,11 @@ public class ViestiDao implements Dao<Alue, Integer> {
         while (rs.next()) {
             Integer id = rs.getInt("id");
             Integer avaus = rs.getInt("avaus");
-            //timestamp
+            String aikaleima = rs.getString("aikaleima");
             String nimimerkki = rs.getString("nimimerkki");
             String viestin_sisalto = rs.getString("viestin_sisalto");
 
-            viesti.add(new Viesti(id, avaus, nimimerkki, viestin_sisalto));
+            viesti.add(new Viesti(id, avaus, aikaleima, nimimerkki, viestin_sisalto));
         }
 
         rs.close();

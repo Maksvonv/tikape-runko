@@ -5,15 +5,16 @@ public class Viesti {
     
     private Integer id;
     private Integer avaus;
-    //private timestamp 
+    private String aikaleima;
     private String nimimerkki;
     private String viestin_sisalto; //ö?
 
 
 
-public Viesti(Integer id, Integer avaus, String nimimerkki, String viestin_sisalto) {
+public Viesti(Integer id, Integer avaus, String aikaleima, String nimimerkki, String viestin_sisalto) {
         this.id = id;
         this.avaus = avaus;
+        this.aikaleima = aikaleima;
         this.nimimerkki = nimimerkki;
         this.viestin_sisalto = viestin_sisalto;
     }
@@ -52,6 +53,15 @@ public Viesti(Integer id, Integer avaus, String nimimerkki, String viestin_sisal
         this.viestin_sisalto = viestin_sisalto;
     }
 
+    public String getAikaleima() {
+        return aikaleima;
+    }
+
+    public void setAikaleima(String aikaleima) {
+        this.aikaleima = aikaleima;
+    }
+    
+    
     
     
     

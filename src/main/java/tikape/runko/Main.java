@@ -70,6 +70,19 @@ public class Main {
 
             return new ModelAndView(map, "avaus");
         }, new ThymeleafTemplateEngine());
+         
+         post("/uusi", new Route() {
+
+            public Object handle(Request req, Response res) throws SQLException {
+                String viesti = req.queryParams("viesti");
+                
+                String nimimerkki = req.queryParams("nimimerkki");
+                Statement stmt = connection.createStatement();
+                stmt.executeUpdate("INSERT INTO Viesti (id, avaus, nimimerkki, viestin_sisältö) VALUES ("+id+", 1, \""+ nimimerkki +"\" , \"" +viesti+ "\");");
+                
+                return "Viesti: \"" + viesti +"\" lähetetty";
+            }
+        });
 
         get("/opiskelijat", (req, res) -> {
             HashMap map = new HashMap<>();
@@ -85,18 +98,7 @@ public class Main {
             return new ModelAndView(map, "opiskelija");
         }, new ThymeleafTemplateEngine());
         
-        post("/uusi", new Route() {
-
-            public Object handle(Request req, Response res) throws SQLException {
-                String viesti = req.queryParams("viesti");
-                
-                String nimimerkki = req.queryParams("nimimerkki");
-                Statement stmt = connection.createStatement();
-                stmt.executeUpdate("INSERT INTO Viesti (id, avaus, nimimerkki, viestin_sisältö) VALUES ("+id+", 1, \""+ nimimerkki +"\" , \"" +viesti+ "\");");
-                
-                return "Viesti: \"" + viesti +"\" lähetetty";
-            }
-        });
+        
     
 }
 }

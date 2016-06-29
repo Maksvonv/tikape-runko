@@ -11,7 +11,9 @@
 
         <ol>
             <li th:each="avaus: ${avaukset}">
-                <span th:text="${avaus.avauksen_otsikko}">avauksen nimi</span>
+                <span th:text="${avaus.avauksen_nimi}">avauksen nimi</span>
+                 <span th:text="${avaus.viesteja}">viestie maara</span>
+                  <span th:text="${avaus.viimeisin_viesti}">vika viesti</span>
                 <a th:href="${'/avaus/' + avaus.id}">linkki</a>
             </li>
 
@@ -19,6 +21,14 @@
 
 
         </ol>
+        
+         <form method="POST" action= "/alue/:id" th:attr="action= ${'/alue/' + alue.id}" >
+            Lis&#228;&#228; avaus:
+            <input type="text" name="uusi_avaus"></input>
+
+            <input type="submit" value="L&#228;het&#228;"></input>
+
+        </form>
 
         <p> </p>
     </body>

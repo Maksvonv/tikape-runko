@@ -60,6 +60,32 @@ public class ViestiDao implements Dao<Alue, Integer> {
 
         return viesti;
     }
+    
+    public List<Viesti> etsiOikeatsivu(Integer key, Integer mones) throws SQLException {
+
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Viesti WHERE avaus = ? LIMIT 10 OFFSET ?");
+        stmt.setObject(1, key); 
+        stmt.setObject(1, mones);
+
+        ResultSet rs = stmt.executeQuery();
+        List<Viesti> viesti = new ArrayList<>();
+        while (rs.next()) {
+            Integer id = rs.getInt("id");
+            Integer avaus = rs.getInt("avaus");
+            String aikaleima = rs.getString("aikaleima");
+            String nimimerkki = rs.getString("nimimerkki");
+            String viestin_sisalto = rs.getString("viestin_sisalto");
+
+            viesti.add(new Viesti(id, avaus, aikaleima, nimimerkki, viestin_sisalto));
+        }
+
+        rs.close();
+        stmt.close();
+        connection.close();
+
+        return viesti;
+    }
 
     public void lisaa(int avaus, String nimimerkki, String viesti) throws SQLException {
         Connection connection = database.getConnection();

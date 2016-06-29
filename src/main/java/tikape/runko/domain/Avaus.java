@@ -6,16 +6,24 @@ public class Avaus {
     
     private Integer id;
     private Integer alue;
-    private String avauksen_otsikko;
-    private String avauksen_sisalto; //ö?
-    private String nimimerkki;
+    private String avauksen_nimi;
+    
+    private Integer viesteja;
+    private String viimeisin_viesti;
 
-    public Avaus(Integer id, Integer alue, String avauksen_otsikko, String avauksen_sisalto, String nimimerkki) {
+    public Avaus(Integer id, Integer alue,String avauksen_nimi) {
         this.id = id;
         this.alue = alue;
-        this.avauksen_otsikko = avauksen_otsikko;
-        this.avauksen_sisalto = avauksen_sisalto;
-        this.nimimerkki = nimimerkki;
+        
+        this.avauksen_nimi = avauksen_nimi;
+        
+    }
+
+    public Avaus(Integer id, String avauksen_nimi, Integer viesteja, String viimeisin_viesti) {
+       this.id = id;
+        this.avauksen_nimi = avauksen_nimi;
+       this.viesteja = viesteja;
+       this.viimeisin_viesti = viimeisin_viesti;
     }
 
     public Integer getId() {
@@ -34,29 +42,32 @@ public class Avaus {
         this.alue = alue;
     }
 
-    public String getAvauksen_otsikko() {
-        return avauksen_otsikko;
+    public String getAvauksen_nimi() {
+        return avauksen_nimi;
     }
 
-    public void setAvauksen_otsikko(String avauksen_otsikko) {
-        this.avauksen_otsikko = avauksen_otsikko;
+    public void setAvauksen_nimi(String avauksen_nimi) {
+        this.avauksen_nimi = avauksen_nimi;
     }
 
-    public String getAvauksen_sisalto() {
-        return avauksen_sisalto;
+    public Integer getViesteja() {
+        return viesteja;
     }
 
-    public void setAvauksen_sisalto(String avauksen_sisalto) {
-        this.avauksen_sisalto = avauksen_sisalto;
+    public void setViesteja(Integer viesteja) {
+        this.viesteja = viesteja;
     }
 
-    public String getNimimerkki() {
-        return nimimerkki;
+    public String getViimeisin_viesti() {
+        return viimeisin_viesti;
     }
 
-    public void setNimimerkki(String nimimerkki) {
-        this.nimimerkki = nimimerkki;
+    public void setViimeisin_viesti(String viimeisin_viesti) {
+        this.viimeisin_viesti = viimeisin_viesti;
     }
+
+    
+   
     
     
     

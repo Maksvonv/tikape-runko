@@ -6,41 +6,40 @@
         <meta charset="utf-8" />
 
         <style>
-     
-  
+         
         </style>
     </head>
 
     <body> 
-        <h1>Heippa vaan!</h1>
+        <h1>Hyv&#228; Foorumi</h1>
 
-        <p>Ja .. <span th:text="${viesti}">jotain?</span></p>
 
-        <p><a href="/opiskelijat">Tästä opiskelijalistaukseen.</a></p>
-        <div>  
-<!--            Täl divil pitäs saada jotenki muokattuu ne 3 lokeroo.. Css pitää salee käyttää-->
-            <ol>
-                <li th:each="alue: ${alueet}">
-                    <span th:text="${alue.alueen_nimi}">alueen nimi</span>
-                    <span th:text="${alue.id}">alueen id</span>
+        
 
-                </li>
-            </ol>
-        </div>
+        <ol>
 
-        <div>
-            <ol>
+            <li th:each="alue: ${paska}">
+                <span th:text="${alue.alueen_nimi}">alueen nimi</span>
+                <span th:text="${alue.ketjujen_maara}">ketjujen maara</span>
+                <span th:text="${alue.viimeisin_viesti}">viimesin viesti</span>
+                <a th:href="${'/alue/' + alue.id}">linkki</a>
 
-                <li th:each="alue: ${paska}">
-                    <span th:text="${alue.alueen_nimi}">alueen nimi</span>
-                    <span th:text="${alue.ketjujen_maara}">ketjujen maara</span>
-                    <a th:href="${'/alue/' + alue.id}">linkki</a>
-                    
 
-                </li>
+            </li>
 
-            </ol>
-        </div>
+
+
+        </ol>
+
+
+        <form method="POST" action= "/">
+            Lis&#228;&#228; alue:
+            <input type="text" name="uusi_alue"></input>
+
+            <input type="submit" value="L&#228;het&#228;"></input>
+
+        </form>
+
 
 
 

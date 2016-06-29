@@ -7,7 +7,7 @@
     </head>
 
     <body>
-        <h1> <span th:text="${avaus.avauksen_otsikko}">avauksen otsikko</span>!</h1>
+        <h1> <span th:text="${avaus.avauksen_nimi}">avauksen otsikko</span>!</h1>
 
         <ol>
             <li th:each="viesti: ${viestit}">
@@ -24,9 +24,10 @@
 
 
         </ol>
+        
 
 
-        <form method="POST" action= "/ketju/:id" th:attr="action= ${'/avaus/' + avaus.id}" >
+        <form method="POST" action= "/avaus/:id" th:attr="action= ${'/avaus/' + avaus.id}" >
             Nimimerkki:
             <input type="text" name="nimimerkki"></input>
             Viesti:

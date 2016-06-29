@@ -12,7 +12,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import tikape.runko.domain.Avaus;
-import tikape.runko.domain.Opiskelija;
 
 public class AvausDao implements Dao<Avaus, Integer> {
 
@@ -36,11 +35,11 @@ public class AvausDao implements Dao<Avaus, Integer> {
 
         Integer id = rs.getInt("id");
         Integer alue = rs.getInt("alue");
-        String avauksen_otsikko = rs.getString("avauksen_otsikko");
-        String avauksen_sisalto = rs.getString("avauksen_sisalto");
-        String nimimerkki = rs.getString("nimimerkki");
+        
+        String avauksen_nimi = rs.getString("avauksen_nimi");
+       
 
-        Avaus o = new Avaus(id, alue, avauksen_otsikko, avauksen_sisalto, nimimerkki);
+        Avaus o = new Avaus(id, alue, avauksen_nimi);
 
         rs.close();
         stmt.close();
@@ -60,11 +59,9 @@ public class AvausDao implements Dao<Avaus, Integer> {
         while (rs.next()) {
             Integer id = rs.getInt("id");
             Integer alue = rs.getInt("alue");
-            String avauksen_otsikko = rs.getString("avauksen_otsikko");
-            String avauksen_sisalto = rs.getString("avauksen_sisalto");
-            String nimimerkki = rs.getString("nimimerkki");
-
-            avaus.add(new Avaus(id, alue, avauksen_otsikko, avauksen_sisalto, nimimerkki));
+            String avauksen_nimi = rs.getString("avauksen_nimi");
+     
+            avaus.add(new Avaus(id, alue, avauksen_nimi));
         }
 
         rs.close();
@@ -77,19 +74,19 @@ public class AvausDao implements Dao<Avaus, Integer> {
     public List<Avaus> etsiOikeat(Integer key) throws SQLException {
 
         Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Avaus WHERE alue = ?");
+        PreparedStatement stmt = connection.prepareStatement("SELECT Avaus.id, Avaus.avauksen_nimi, COUNT(Viesti.id) AS viesteja, MAX(Viesti.aikaleima) AS viimeisin_viesti FROM Avaus LEFT JOIN Viesti ON Viesti.avaus = Avaus.id WHERE Avaus.alue = ? GROUP BY Avaus.id ORDER BY Viesti.aikaleima DESC");
         stmt.setObject(1, key);
         
         ResultSet rs = stmt.executeQuery();
         List<Avaus> avaus = new ArrayList<>();
         while (rs.next()) {
             Integer id = rs.getInt("id");
-            Integer alue = rs.getInt("alue");
-            String avauksen_otsikko = rs.getString("avauksen_otsikko");
-            String avauksen_sisalto = rs.getString("avauksen_sisalto");
-            String nimimerkki = rs.getString("nimimerkki");
+            String avauksen_nimi = rs.getString("avauksen_nimi");
+            Integer viesteja = rs.getInt("viesteja");
+            String viimeisin_viesti = rs.getString("viimeisin_viesti");
+   
 
-            avaus.add(new Avaus(id, alue, avauksen_otsikko, avauksen_sisalto, nimimerkki));
+            avaus.add(new Avaus(id, avauksen_nimi, viesteja, viimeisin_viesti));
         }
 
         rs.close();
@@ -102,6 +99,21 @@ public class AvausDao implements Dao<Avaus, Integer> {
     @Override
     public void delete(Integer key) throws SQLException {
         // ei toteutettu
+    }
+
+       public void lisaa(int alue, String aloitus) throws SQLException {
+        Connection connection = database.getConnection();
+
+        PreparedStatement stmt = connection.prepareStatement("INSERT INTO Avaus (alue, avauksen_nimi) VALUES (?,?)");
+        
+        stmt.setObject(1, alue);
+        stmt.setObject(2, aloitus);
+        
+        
+        stmt.executeUpdate();
+
+        stmt.close();
+        connection.close();
     }
 
 }

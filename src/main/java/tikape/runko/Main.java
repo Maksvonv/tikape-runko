@@ -1,4 +1,5 @@
 package tikape.runko;
+
 import static java.lang.Math.random;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -20,31 +21,23 @@ import tikape.runko.database.ViestiDao;
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        Database database = new Database("jdbc:sqlite:opiskelijat.db");
-        database.init();
-        
-        Database databaseU = new Database("jdbc:sqlite:foorumi.db");
-        
-        String a = "66KES88";
-        
-        int id = 100004; // pitää vaihtaa joka viestin jälkeen
-        
-        
+        //Database database = new Database("jdbc:sqlite:opiskelijat.db");
+        //database.init();
 
-        OpiskelijaDao opiskelijaDao = new OpiskelijaDao(database);
-        
+        Database databaseU = new Database("jdbc:sqlite:foorumi.db");
+        databaseU.init();
+        String a = "66KES88";
+
+        int id = 100004; // pitää vaihtaa joka viestin jälkeen
+
+       
+        //OpiskelijaDao opiskelijaDao = new OpiskelijaDao(database);
+
         AvausDao avausDao = new AvausDao(databaseU);
         AlueDao alueDao = new AlueDao(databaseU);
         ViestiDao viestiDao = new ViestiDao(databaseU);
-        
-        Connection connection = DriverManager.getConnection("jdbc:sqlite:foorumi.db");
 
-       
-        
-     
-        
-       
-        
+        //Connection connection = DriverManager.getConnection("jdbc:sqlite:foorumi.db");
 
         get("/", (req, res) -> {
             HashMap map = new HashMap<>();
@@ -53,7 +46,7 @@ public class Main {
 
             return new ModelAndView(map, "index");
         }, new ThymeleafTemplateEngine());
-        
+
         get("/alue/:id", (req, res) -> {
             HashMap map = new HashMap<>();
             map.put("alue", alueDao.findOne(Integer.parseInt(req.params("id"))));
@@ -61,8 +54,8 @@ public class Main {
 
             return new ModelAndView(map, "alue");
         }, new ThymeleafTemplateEngine());
-        
-         get("/avaus/:id", (req, res) -> {
+
+        get("/avaus/:id", (req, res) -> {
             HashMap map = new HashMap<>();
             map.put("avaus", avausDao.findOne(Integer.parseInt(req.params("id"))));
             //map.put("avaukset", avausDao.etsiOikeat(Integer.parseInt(req.params("id"))));
@@ -70,18 +63,19 @@ public class Main {
 
             return new ModelAndView(map, "avaus");
         }, new ThymeleafTemplateEngine());
-         
-         post("/uusi", new Route() {
 
-            public Object handle(Request req, Response res) throws SQLException {
-                String viesti = req.queryParams("viesti");
-                
-                String nimimerkki = req.queryParams("nimimerkki");
-                Statement stmt = connection.createStatement();
-                stmt.executeUpdate("INSERT INTO Viesti (id, avaus, nimimerkki, viestin_sisältö) VALUES ("+id+", 1, \""+ nimimerkki +"\" , \"" +viesti+ "\");");
-                
-                return "Viesti: \"" + viesti +"\" lähetetty";
-            }
+        post("/avaus/:id", (req, res) -> {
+            String viesti = req.queryParams("viesti");
+            
+            String nimimerkki = req.queryParams("nimimerkki");
+            System.out.println(nimimerkki);
+            System.out.println(viesti);
+            
+            viestiDao.lisaa(avausDao.findOne(Integer.parseInt(req.params("id"))).getId(), nimimerkki, viesti );
+            System.out.println(avausDao.findOne(Integer.parseInt(req.params("id"))).getId());
+            res.redirect("/avaus/" + req.params("id"));
+
+            return "";
         });
 
         get("/opiskelijat", (req, res) -> {
@@ -91,14 +85,12 @@ public class Main {
             return new ModelAndView(map, "opiskelijat");
         }, new ThymeleafTemplateEngine());
 
-        get("/opiskelijat/:id", (req, res) -> {
-            HashMap map = new HashMap<>();
-            map.put("opiskelija", opiskelijaDao.findOne(Integer.parseInt(req.params("id"))));
+//        get("/opiskelijat/:id", (req, res) -> {
+//            HashMap map = new HashMap<>();
+//            map.put("opiskelija", opiskelijaDao.findOne(Integer.parseInt(req.params("id"))));
+//
+//            return new ModelAndView(map, "opiskelija");
+//        }, new ThymeleafTemplateEngine());
 
-            return new ModelAndView(map, "opiskelija");
-        }, new ThymeleafTemplateEngine());
-        
-        
-    
-}
+    }
 }

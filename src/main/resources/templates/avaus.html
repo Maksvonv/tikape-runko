@@ -26,7 +26,7 @@
         </ol>
 
 
-        <form method="POST" action="/uusi">
+        <form method="POST" action= "/ketju/:id" th:attr="action= ${'/avaus/' + avaus.id}" >
             Nimimerkki:
             <input type="text" name="nimimerkki"></input>
             Viesti:

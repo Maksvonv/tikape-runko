@@ -60,19 +60,20 @@ public class ViestiDao implements Dao<Alue, Integer> {
 
         return viesti;
     }
-    
-     public void lisaa(Request req, Response res) throws SQLException {
-         Connection connection = database.getConnection();
-         Statement stmt = connection.createStatement();
-         
-         String viesti = req.queryParams("viesti");
-                
-         String nimimerkki = req.queryParams("nimimerkki");
-         
-         stmt.executeUpdate("INSERT INTO Viesti (id, avaus, nimimerkki, viestin_sisalto) VALUES ("+100+", 1, \""+ nimimerkki +"\" , \"" +viesti+ "\");");
-         
-         stmt.close();
-         connection.close();
-     }
+
+    public void lisaa(int avaus, String nimimerkki, String viesti) throws SQLException {
+        Connection connection = database.getConnection();
+
+        PreparedStatement stmt = connection.prepareStatement("INSERT INTO Viesti (avaus, aikaleima, nimimerkki, viestin_sisalto) VALUES (?,CURRENT_TIMESTAMP,?,?)");
+
+        stmt.setObject(1, avaus);
+        stmt.setObject(2, nimimerkki);
+        stmt.setObject(3, viesti);
+        
+        stmt.executeUpdate();
+
+        stmt.close();
+        connection.close();
+    }
 
 }

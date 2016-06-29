@@ -33,6 +33,11 @@ public class AlueDao implements Dao<Alue, Integer> {
         String alueen_nimi = rs.getString("alueen_nimi");
 
         Alue o = new Alue(id, alueen_nimi);
+        
+        rs.close();
+        stmt.close();
+        connection.close();
+        
         return o;
     }
 

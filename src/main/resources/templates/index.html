@@ -6,7 +6,7 @@
         <meta charset="utf-8" />
 
         <style>
-         
+
         </style>
     </head>
 
@@ -14,22 +14,30 @@
         <h1>Hyv&#228; Foorumi</h1>
 
 
-        
 
-        <ol>
+        <table width="600">
+            <tr> 
+                <td>Alue</td> 
+                <td>Viestej&#228; yhteens&#228; </td> 
+                <td>Viimeisin viesti </td> 
+            </tr>
 
-            <li th:each="alue: ${paska}">
-                <span th:text="${alue.alueen_nimi}">alueen nimi</span>
-                <span th:text="${alue.ketjujen_maara}">ketjujen maara</span>
-                <span th:text="${alue.viimeisin_viesti}">viimesin viesti</span>
-                <a th:href="${'/alue/' + alue.id}">linkki</a>
+            
+                <tr th:each="alue: ${paska}">
+                    <td><span th:text="${alue.alueen_nimi}">alueen nimi</span></td>
+                    <td><span th:text="${alue.ketjujen_maara}">ketjujen maara</span></td>
+                    <td><span th:text="${alue.viimeisin_viesti}">viimesin viesti</span></td>
+                    <td><a th:href="${'/alue/' + alue.id}">linkki</a></td>
 
 
-            </li>
+                </tr>
+            
 
 
 
-        </ol>
+        </table>
+
+
 
 
         <form method="POST" action= "/">

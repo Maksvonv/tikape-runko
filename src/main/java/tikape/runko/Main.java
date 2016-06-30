@@ -16,6 +16,7 @@ import tikape.runko.database.AlueDao;
 import tikape.runko.database.AvausDao;
 import tikape.runko.database.Database;
 import tikape.runko.database.ViestiDao;
+import tikape.runko.domain.Avaus;
 
 public class Main {
 
@@ -77,15 +78,15 @@ public class Main {
             return new ModelAndView(map, "avaus");
         }, new ThymeleafTemplateEngine());
         
-//         get("/avaus/:id/:sivu", (req, res) -> {
-//            HashMap map = new HashMap<>();
-//            //map.put("avaus", avausDao.findOne(Integer.parseInt(req.params("id"))));
-//            //map.put("viestit", viestiDao.etsiOikeat(Integer.parseInt(req.params("id"))));
-//            map.put("viestit", viestiDao.etsiOikeatsivu(Integer.parseInt(req.params("id")), Integer.parseInt(req.params("sivu"))));
-//            
-//            
-//            return new ModelAndView(map, "avaus");
-//        }, new ThymeleafTemplateEngine());
+         get("/avaus/:id/:sivu", (req, res) -> {
+            HashMap map = new HashMap<>();
+            
+            Avaus avaus = avausDao.findOne(Integer.parseInt(req.params("id")));
+            map.put("viestit", viestiDao.etsiOikeatsivu(Integer.parseInt(req.params("id")), Integer.parseInt(req.params("sivu"))));
+            
+            
+            return new ModelAndView(map, "avaus");
+        }, new ThymeleafTemplateEngine());
 
         post("/avaus/:id", (req, res) -> {
             String viesti = req.queryParams("viesti");

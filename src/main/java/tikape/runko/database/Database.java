@@ -43,14 +43,20 @@ public class Database {
 //        lista.add("INSERT INTO Opiskelija (nimi) VALUES ('Platon');");
 //        lista.add("INSERT INTO Opiskelija (nimi) VALUES ('Aristoteles');");
 //        lista.add("INSERT INTO Opiskelija (nimi) VALUES ('Homeros');");
+        lista.add("CREATE TABLE Alue (id INTEGER PRIMARY KEY, alueen_nimi VARCHAR(50) NOT NULL);");
+        lista.add("CREATE TABLE Avaus (id INTEGER PRIMARY KEY, alue INTEGER NOT NULL, avauksen_nimi VARCHAR(30) NOT NULL, FOREIGN KEY (alue) REFERENCES Avaus(id));");
+        lista.add("CREATE TABLE Viesti (id INTEGER PRIMARY KEY, avaus INTEGER NOT NULL, aikaleima TIMESTAMP, nimimerkki VARCHAR(20) NOT NULL, viestin_sisalto VARCHAR(500) NOT NULL, FOREIGN KEY (avaus) REFERENCES Avaus(id));");
         
-        
-        lista.add("CREATE TABLE Alue (id INTEGER PRIMARY KEY, alueen_nimi VARCHAR NOT NULL)");
-        lista.add("CREATE TABLE Avaus ( id INTEGER PRIMARY KEY, alue INTEGER NOT NULL, "
-                + "avauksen_otsikko VARCHAR(30) NOT NULL, avauksen_sisalto VARCHAR(500) NOT NULL, FOREIGN KEY (alue) REFERENCES Alue(id));");
-        lista.add("CREATE TABLE Viesti (id INTEGER PRIMARY KEY, avaus INTEGER NOT NULL, aikaleima TIMESTAMP, "
-                + "nimimerkki VARCHAR(20) NOT NULL, viestin_sisalto VARCHAR(500) NOT NULL , vastaus_viestiin INTEGER, "
-                + "FOREIGN KEY (avaus) REFERENCES Avaus(id));");
+
+        lista.add("INSERT INTO Alue VALUES (1, 'maahanmuutto');");
+        lista.add("INSERT INTO Alue VALUES (2, 'suomenkesä');");
+        lista.add("INSERT INTO Alue VALUES (3, 'autokauppa');");
+        lista.add("INSERT INTO Viesti VALUES (1,1, CURRENT_TIMESTAMP, 'tippat', 'yolo');");
+        lista.add("INSERT INTO Viesti VALUES (2,2, CURRENT_TIMESTAMP, 'sairast', 'molo');");
+        lista.add("INSERT INTO Viesti VALUES (3,3, CURRENT_TIMESTAMP, 'paperit', 'kolo');");
+        lista.add("INSERT INTO Avaus VALUES (1,1, 'herranjestas');");
+        lista.add("INSERT INTO Avaus VALUES (2,1, 'tietoja');");
+        lista.add("INSERT INTO Avaus VALUES (3,2, 'keskustelua viljamista');");
 
         return lista;
     }

@@ -8,20 +8,26 @@
 
     <body>
         <h1> <span th:text="${alue.alueen_nimi}">alueen nimi</span>!</h1>
+        <table width="600">
+            <tr>
+                <td>Alue</td>
+                <td>Viestej&#228; yhteens&#228;</td>
+                <td>Viimeisin viesti</td>
+            </tr>
+            
+            
+            <tr th:each="avaus: ${avaukset}">
+                <td><span th:text="${avaus.avauksen_nimi}">avauksen nimi</span></td>
+                <td><span th:text="${avaus.viesteja}">viestie maara</span></td>
+                <td> <span th:text="${avaus.viimeisin_viesti}">vika viesti</span> </td>
+                <td> <a th:href="${'/avaus/' + avaus.id}">linkki</a> </td>
+            </tr>
 
-        <ol>
-            <li th:each="avaus: ${avaukset}">
-                <span th:text="${avaus.avauksen_nimi}">avauksen nimi</span>
-                 <span th:text="${avaus.viesteja}">viestie maara</span>
-                  <span th:text="${avaus.viimeisin_viesti}">vika viesti</span>
-                <a th:href="${'/avaus/' + avaus.id}">linkki</a>
-            </li>
 
 
 
-
-        </ol>
         
+        </table>
          <form method="POST" action= "/alue/:id" th:attr="action= ${'/alue/' + alue.id}" >
             Lis&#228;&#228; avaus:
             <input type="text" name="uusi_avaus"></input>

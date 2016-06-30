@@ -8,23 +8,29 @@
 
     <body>
         <h1> <span th:text="${avaus.avauksen_nimi}">avauksen otsikko</span>!</h1>
-
-        <ol>
-            <li th:each="viesti: ${viestit}">
-                <span th:text="${viesti.nimimerkki}">viestin lähettäjä</span>
-                <span th:text="${viesti.viestin_sisalto}">viestin sisältö</span>
-                <span th:text="${viesti.aikaleima}">viestin aikaleima</span>
-
-
-
-
-            </li>
-
-
-
-
-        </ol>
         
+        <table width="600">
+        
+         <tr> 
+                <td>Nimimerkki</td> 
+                <td>Viesti</td> 
+                <td>L&#228;hetetty</td> 
+            </tr>
+            <tr th:each="viesti: ${viestit}">
+                <td><span th:text="${viesti.nimimerkki}">viestin lähettäjä</span></td>
+                <td><span th:text="${viesti.viestin_sisalto}">viestin sisältö</span></td>
+                <td><span th:text="${viesti.aikaleima}">viestin aikaleima</span></td>
+
+
+
+
+            </tr>
+
+
+
+
+        
+       </table> 
 
 
         <form method="POST" action= "/avaus/:id" th:attr="action= ${'/avaus/' + avaus.id}" >
@@ -34,5 +40,6 @@
             <input type="text" name="viesti"></input>
             <input type="submit" value="L&#228;het&#228;"></input>
         </form> 
+        
     </body>
 </html>

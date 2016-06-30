@@ -27,7 +27,10 @@ public class Main {
             port(Integer.valueOf(System.getenv("PORT")));
         }
         
-         
+//         String jdbcOsoite = "jdbc:sqlite:foorumi.db";
+//        if (System.getenv("DATABASE_URL") != null) {
+//            jdbcOsoite = System.getenv("DATABASE_URL");
+//        }        !!!Tän koodin ku laitto nii ei toiminu heroku!!!
         
 
         Database databaseU = new Database("jdbc:sqlite:foorumi.db");

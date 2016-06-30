@@ -22,6 +22,11 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
+        // asetetaan portti jos heroku antaa PORT-ympäristömuuttujan
+        if (System.getenv("PORT") != null) {
+            port(Integer.valueOf(System.getenv("PORT")));
+        }
+
         Database databaseU = new Database("jdbc:sqlite:foorumi.db");
         databaseU.init();
 
@@ -39,11 +44,11 @@ public class Main {
 
         post("/", (req, res) -> {
             String viesti = req.queryParams("uusi_alue");
-            
+
             alueDao.lisaa(viesti);
-            
+
             System.out.println(viesti);
-            
+
             res.redirect("/");
 
             return "";
@@ -56,15 +61,12 @@ public class Main {
 
             return new ModelAndView(map, "alue");
         }, new ThymeleafTemplateEngine());
-        
-         post("/alue/:id", (req, res) -> {
+
+        post("/alue/:id", (req, res) -> {
             String viesti = req.queryParams("uusi_avaus");
-            
- 
+
             avausDao.lisaa(alueDao.findOne(Integer.parseInt(req.params("id"))).getId(), viesti);
-            
-            
-            
+
             res.redirect("/alue/" + req.params("id"));
 
             return "";
@@ -77,14 +79,13 @@ public class Main {
 
             return new ModelAndView(map, "avaus");
         }, new ThymeleafTemplateEngine());
-        
-         get("/avaus/:id/:sivu", (req, res) -> {
+
+        get("/avaus/:id/:sivu", (req, res) -> {
             HashMap map = new HashMap<>();
-            
+
             Avaus avaus = avausDao.findOne(Integer.parseInt(req.params("id")));
             map.put("viestit", viestiDao.etsiOikeatsivu(Integer.parseInt(req.params("id")), Integer.parseInt(req.params("sivu"))));
-            
-            
+
             return new ModelAndView(map, "avaus");
         }, new ThymeleafTemplateEngine());
 

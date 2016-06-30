@@ -27,12 +27,10 @@ public class Main {
             port(Integer.valueOf(System.getenv("PORT")));
         }
         
-         String jdbcOsoite = "jdbc:sqlite:foorumi.db";
-        if (System.getenv("DATABASE_URL") != null) {
-            jdbcOsoite = System.getenv("DATABASE_URL");
-        }
+         
+        
 
-        Database databaseU = new Database(jdbcOsoite);
+        Database databaseU = new Database("jdbc:sqlite:foorumi.db");
         databaseU.init();
 
         AvausDao avausDao = new AvausDao(databaseU);
